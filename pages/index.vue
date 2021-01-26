@@ -1,6 +1,6 @@
 <template>
   <div
-    class="container px-5 flex flex-col content-center justify-center min-h-screen mx-auto"
+    class="container px-5 flex flex-col content-center justify-center min-h-screen mx-auto box-inner"
   >
     <div class="content-interaction">
       <img
@@ -20,12 +20,9 @@
           @next="currentWindows = 2"
         />
         <!-- Raspa -->
-        <ScratchableWindows
-          v-if="currentWindows == 2"
-          @next="currentWindows = 3"
-        />
+        <ScratchableWindows v-if="currentWindows == 2" />
         <!-- Thanks -->
-        <ThanksWindows v-if="currentWindows == 3" />
+        <!-- <ThanksWindows v-if="currentWindows == 3" /> -->
       </fade-transition>
     </div>
   </div>
@@ -56,7 +53,6 @@ body {
   font-style: normal;
 }
 .footer {
-  @apply absolute;
   bottom: 0;
   text-align: center;
   font-family: 'Chypre Cond';
@@ -92,7 +88,7 @@ body {
     @apply rounded-lg;
     @apply bg-white;
     @apply mb-5;
-    @media (min-width: 768px) {
+    @media (min-width: 640px) {
       width: 320px;
       margin: 0 auto;
       @apply mb-5;
@@ -167,5 +163,27 @@ body {
 .slide-fade-leave-to {
   transform: translateY(10px);
   opacity: 0;
+}
+@media (orientation: landscape) and (max-width: 1200px) {
+  .box-inner {
+    min-height: 35rem;
+  }
+}
+@media (orientation: portrait) {
+  .footer {
+    @apply fixed;
+  }
+}
+
+@media (orientation: landscape) {
+  .footer {
+    padding-top: 15px;
+    background-size: contain;
+  }
+}
+@media (orientation: landscape) and (min-width: 1200px) {
+  .footer {
+    position: fixed;
+  }
 }
 </style>
