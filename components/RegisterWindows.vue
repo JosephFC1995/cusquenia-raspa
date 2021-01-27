@@ -1,6 +1,22 @@
 <template>
   <div class="windows-register">
     <div class="box box-windows box-register flex items-center">
+      <div class="loading" :class="[showLoading ? '' : 'hidden']">
+        <div class="lds-spinner">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
       <div class="box-content-inside">
         <h1 class="text-center mb-5">Completa tus datos</h1>
         <vue-form
@@ -53,8 +69,13 @@
               <option value="" disabled selected>
                 Seleccione un restaurante
               </option>
-              <option value="1">Restauran 1</option>
-              <option value="1">Restauran 2</option>
+              <option
+                :value="restaurant.id"
+                v-for="restaurant in array_restaurant"
+                :key="restaurant.id"
+              >
+                {{ restaurant.nombre }}
+              </option>
             </select>
           </validate>
 
@@ -90,19 +111,41 @@ export default {
         name: '',
         email: '',
         restaurant: '',
+        phone: '',
         terms: [1],
       },
+      array_restaurant: [],
+      showLoading: false,
     }
   },
   methods: {
-    onSubmit: function () {
+    async onSubmit() {
       if (this.formstate.$invalid) {
-        // alert user and exit early
         return
       }
-      this.$emit('next')
+      this.showLoading = true
+      let newForm = {
+        restaurant: this.model.restaurant,
+        nombre: this.model.name,
+        correo: this.model.email,
+        telefono: this.model.phone,
+      }
+      let response = await this.$axios
+        .$post('formulario', newForm)
+        .catch((err) => {
+          console.log(err)
+        })
+      this.showLoading = false
+
+      if (!response) {
+        return
+      }
+      this.$emit('next', response)
       // otherwise submit form
     },
+  },
+  async mounted() {
+    this.array_restaurant = await this.$axios.$get('/restaurant')
   },
 }
 </script>

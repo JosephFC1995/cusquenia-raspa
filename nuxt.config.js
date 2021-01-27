@@ -26,11 +26,18 @@ export default {
 
     components: true,
 
-    buildModules: ['@nuxtjs/tailwindcss'],
+    buildModules: ['@nuxtjs/tailwindcss', '@nuxtjs/dotenv'],
 
     modules: ['@nuxtjs/axios'],
 
-    axios: {},
+    axios: {
+        baseURL: process.env.BASE_URL_API,
+        headers: {
+            common: {
+                'X-Authorization': 'dgO9sxkRxFFFAYZ0Z4LfUR5yPXZPMjREow6f4SzSGbPycrp0FhC1FW4YlTWEeUGf',
+            },
+        },
+    },
 
     build: {},
 }
