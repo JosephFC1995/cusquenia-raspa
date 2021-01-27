@@ -87,14 +87,17 @@ export default {
 
       if (this.percentage >= 80) {
         this.$refs.scratchable.clearArea()
-        // party.screen({
-        //   color: siteColors,
-        //   size: party.minmax(6, 12),
-        //   count: party.variation(50 * (window.innerWidth / 1980), 0.4),
-        //   angle: -180,
-        //   spread: 80,
-        //   angularVelocity: party.minmax(6, 9),
-        // })
+        if (this.response.premio) {
+          party.screen({
+            color: siteColors,
+            size: party.minmax(6, 12),
+            count: party.variation(50 * (window.innerWidth / 1980), 0.4),
+            angle: -180,
+            spread: 80,
+            angularVelocity: party.minmax(6, 9),
+          })
+        }
+
         // setTimeout(() => {
         //   t.showButtonNext = true
         // }, 3000)
