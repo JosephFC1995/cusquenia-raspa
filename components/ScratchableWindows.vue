@@ -34,10 +34,26 @@
               @load="init()"
             />
             <h3>
-              {{ 'Ganaste ' + response.data ? response.data.premio : '' }}
+              {{ response.message }}
             </h3>
           </div>
         </Scratchable>
+      </div>
+    </div>
+    <div class="indications--floating">
+      <h4>Indicaciones</h4>
+      <div class="list">
+        <div class="list-li">
+          <span class="point"> · </span>
+          <span>
+            Contáctate al teléfono 999 119 115 para coordinar la entrega de tu
+            premio, de lunes a viernes de 10 am a 1 pm.
+          </span>
+        </div>
+        <div class="list-li">
+          <span class="point"> · </span>
+          <span> Toma una captura a esto para recordar las indicaciones. </span>
+        </div>
       </div>
     </div>
     <!-- <div class="btn-group mt-10" :style="{ height: '44px' }">
@@ -71,6 +87,7 @@ export default {
         src: paperPattern,
         repeat: 'no-repeat',
       },
+      finish: false,
       brush: {
         size: 60,
         shape: 'round',
@@ -86,6 +103,7 @@ export default {
       let siteColors = ['#ffa68d', '#850D29']
 
       if (this.percentage >= 80) {
+        this.finish = true
         this.$refs.scratchable.clearArea()
         if (this.response.premio) {
           party.screen({
@@ -140,5 +158,33 @@ export default {
 .components-interaction {
   min-height: 240px;
   position: relative;
+}
+.indications--floating {
+  position: absolute;
+  top: 100%;
+  width: 100%;
+  h4 {
+    font-size: 16px;
+    color: #850d29;
+    text-transform: uppercase;
+    display: block;
+    border-bottom: 1px solid #850d29;
+    margin-bottom: 6px;
+    font-family: 'Hudson NY Serif';
+  }
+  .list {
+    font-family: 'Hudson NY Serif';
+    color: white;
+    font-size: 14px;
+
+    &-li {
+      display: flex;
+    }
+    .point {
+      color: #850d29;
+      font-weight: 600;
+      margin-right: 5px;
+    }
+  }
 }
 </style>

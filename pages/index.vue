@@ -29,7 +29,7 @@
 export default {
   head() {
     return {
-      title: 'Raspa y gana',
+      title: 'Raspa y Gana Cusqueña',
       response: '',
     }
   },
@@ -40,7 +40,6 @@ export default {
   },
   methods: {
     getResponse($event) {
-      console.log($event)
       this.response = $event
       this.currentWindows = 2
     },
@@ -49,6 +48,9 @@ export default {
 </script>
 
 <style lang="scss">
+* {
+  outline: none !important;
+}
 body {
   background-image: url('/images/background_body.png');
   background-size: cover;

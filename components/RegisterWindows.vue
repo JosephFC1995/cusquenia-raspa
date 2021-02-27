@@ -96,6 +96,11 @@
               Registrarme
             </button>
           </div>
+          <div class="col-span-6">
+            <div class="alert" v-if="messageError">
+              {{ messageError }}
+            </div>
+          </div>
         </vue-form>
       </div>
     </div>
@@ -114,12 +119,14 @@ export default {
         phone: '',
         terms: [1],
       },
+      messageError: null,
       array_restaurant: [],
       showLoading: false,
     }
   },
   methods: {
     async onSubmit() {
+      this.messageError = null
       if (this.formstate.$invalid) {
         return
       }
@@ -133,6 +140,7 @@ export default {
       let response = await this.$axios
         .$post('formulario', newForm)
         .catch((err) => {
+          this.messageError = 'Ya participaste el dia de hoy'
           console.log(err)
         })
       this.showLoading = false
@@ -151,6 +159,14 @@ export default {
 </script>
 
 <style lang="scss">
+.alert {
+  background: #d24646f2;
+  padding: 10px 5px;
+  border-radius: 5px;
+  font-size: 12px;
+  text-align: center;
+  letter-spacing: 1px;
+}
 .form {
   &-checkbox {
     font-size: 12px;

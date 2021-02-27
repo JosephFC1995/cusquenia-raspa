@@ -6,7 +6,7 @@ export default {
     head: {
         title: 'raspa-gana',
         htmlAttrs: {
-            lang: 'en',
+            lang: 'es',
         },
         meta: [
             { charset: 'utf-8' },
